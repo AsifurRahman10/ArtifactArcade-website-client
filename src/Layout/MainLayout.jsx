@@ -9,7 +9,7 @@ export const MainLayout = () => {
       <header>
         <Navbar></Navbar>
       </header>
-      <main className="min-h-[590px]">
+      <main className="">
         <Outlet></Outlet>
       </main>
       <footer>

@@ -24,7 +24,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center small-text">
+    <div className="flex flex-col md:flex-row lg:flex-row items-center justify-center small-text md:w-11/12 mx-auto py-10">
       <div className="flex-1">
         <div className="p-4 lg:w-7/12 mx-auto bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
           <form className="space-y-6" onSubmit={handleLoginWithEmail}>
