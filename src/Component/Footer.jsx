@@ -3,7 +3,7 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <div className="footer text-base-content py-10 max-w-screen-2xl mx-auto small-text">
+    <div className="footer text-base-content py-10 small-text">
       <aside>
         <img src={logo} className="w-20 h-20" alt="" />
         <p>

@@ -1,7 +1,7 @@
 import React from "react";
 import "flowbite";
 import logo from "../../public/logo.png";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export const Navbar = () => {
   const li = (
@@ -26,12 +26,14 @@ export const Navbar = () => {
   );
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 small-text">
-      <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4 py-6">
+      <div className="flex flex-wrap items-center justify-between p-4 py-6">
         <img src={logo} className="h-20 w-20" alt="" />
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <button className="btn bg-custom-btn text-white px-8 rounded-none font-bold">
-            Login
-          </button>
+          <Link to="/login">
+            <button className="btn bg-custom-btn text-white px-8 rounded-none font-bold">
+              Login
+            </button>
+          </Link>
           {/* <button
             type="button"
             className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
