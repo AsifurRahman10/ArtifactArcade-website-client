@@ -9,6 +9,7 @@ export default {
     extend: {
       colors: {
         'custom-btn': '#97643f', //theme color
+        'black': '#212529', //black color
       },
     },
   },
