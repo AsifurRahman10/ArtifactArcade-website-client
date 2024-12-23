@@ -2,19 +2,25 @@ import google from "../assets/google.png";
 import Lottie from "lottie-react";
 import login from "../../public/login.json";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 export const Login = () => {
   const { handleGoogleLogin, loginWithEmail } = useContext(AuthContext);
+  const [error, setError] = useState("");
 
   const handleLoginWithEmail = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    loginWithEmail(email, password).then((data) => {
-      console.log(data.user);
-    });
+    loginWithEmail(email, password)
+      .then((data) => {
+        console.log(data.user);
+      })
+      .catch((err) => {
+        const errorText = err.message.slice(15).replace(/[()]/g, "");
+        setError(errorText);
+      });
   };
 
   return (
@@ -49,6 +55,7 @@ export const Login = () => {
                 required
               />
             </div>
+            {error && <p className="text-red-600">{error}</p>}
             <div className="flex items-start">
               <div className="flex items-start">
                 <div className="flex items-center h-5">
