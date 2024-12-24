@@ -16,6 +16,15 @@ export const Register = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
+    if (!/(?=.*[a-z])/.test(password)) {
+      return setError("Password must contain at least one lowercase letter.");
+    }
+    if (!/(?=.*[A-Z])/.test(password)) {
+      return setError("Password must contain at least one uppercase letter.");
+    }
+    if (password.length < 6) {
+      return setError("Password must be at least 6 characters long.");
+    }
     const image = form.image.files[0];
     registerWithEmail(email, password)
       .then((data) => {
