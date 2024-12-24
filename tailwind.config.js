@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'title-bg': "url('/src/assets/title-bg.jpg')",
+      },
       colors: {
         'custom-btn': '#97643f', //theme color
         'black': '#212529', //black color

@@ -3,6 +3,7 @@ import { MainLayout } from "../Layout/MainLayout";
 import { Login } from "../Pages/Login";
 import { Register } from "../Pages/Register";
 import { Home } from "../Pages/Home";
+import { AddArtifacts } from "../Pages/AddArtifacts";
 
 export const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/add_artifacts",
+        element: <AddArtifacts></AddArtifacts>,
       },
       {
         path: "/login",
