@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Title } from "../Component/Title";
 import axios from "axios";
 
 export const AddArtifacts = () => {
+  const [selectedType, setSelectedType] = useState("");
+  const handleSelectedType = (e) => {
+    setSelectedType(e.target.value);
+  };
   const handleAddArtifactsSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const initialData = Object.fromEntries(formData.entries());
     const artifactImage = formData.get("artifactImage");
+    const { artifactImage: _, ...filteredData } = initialData;
     const uploadImg = new FormData();
     uploadImg.append("image", artifactImage);
     axios
@@ -19,12 +24,16 @@ export const AddArtifacts = () => {
       .then((res) => {
         if (res.data.data.display_url) {
           const image = res.data.data.display_url;
-          console.log(image);
           const TotalData = {
-            ...initialData,
+            ...filteredData,
             image,
+            selectedType,
           };
-          console.log(TotalData);
+          axios
+            .post("http://localhost:4000/addArtifacts", TotalData)
+            .then((res) => {
+              console.log(res);
+            });
         }
       });
   };
@@ -72,12 +81,16 @@ export const AddArtifacts = () => {
             <label class="block mb-2 text-lg  font-bold text-black dark:text-white">
               Artifact Type
             </label>
-            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-custom-btn focus:border-custom-btn block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-custom-btn dark:focus:border-custom-btn">
-              <option selected>Choose type</option>
-              <option value="US">Tools</option>
-              <option value="CA">Weapons</option>
-              <option value="FR">Documents</option>
-              <option value="DE">Writings</option>
+            <select
+              onChange={handleSelectedType}
+              value={selectedType}
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-custom-btn focus:border-custom-btn block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-custom-btn dark:focus:border-custom-btn"
+            >
+              <option value="">Choose type</option>
+              <option value="Tools">Tools</option>
+              <option value="Weapons">Weapons</option>
+              <option value="Documents">Documents</option>
+              <option value="Writings">Writings</option>
             </select>
           </div>
           <hr class="h-px my-4 lg:my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
@@ -115,7 +128,7 @@ export const AddArtifacts = () => {
             </label>
             <input
               type="text"
-              name="Dis"
+              name="DiscoverAt"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-custom-btn focus:border-custom-btn block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-custom-btn dark:focus:border-custom-btn flex-1"
               placeholder="When it was discovered e.g. '100 BC'"
               required
@@ -129,6 +142,7 @@ export const AddArtifacts = () => {
             </label>
             <input
               type="text"
+              name="discoveredBy"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-custom-btn focus:border-custom-btn block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-custom-btn dark:focus:border-custom-btn flex-1"
               placeholder="Enter Name of Author or organization"
               required
@@ -142,6 +156,7 @@ export const AddArtifacts = () => {
             </label>
             <input
               type="text"
+              name="presentLocation"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-custom-btn focus:border-custom-btn block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-custom-btn dark:focus:border-custom-btn flex-1"
               placeholder="Enter name of location"
               required
