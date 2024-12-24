@@ -106,7 +106,7 @@ export const Login = () => {
       </div>
       <div className="flex-1">
         <Lottie
-          className="lg:w-11/12 mx-auto"
+          className="lg:w-11/12 mx-auto "
           animationData={login}
           loop={true}
         />
