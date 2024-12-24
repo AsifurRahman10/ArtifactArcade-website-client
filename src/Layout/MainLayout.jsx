@@ -5,11 +5,11 @@ import { Outlet } from "react-router-dom";
 
 export const MainLayout = () => {
   return (
-    <div className="bg-[#FFFFFF] max-w-screen-2xl mx-auto">
+    <div className="bg-[#FFFFFF] ">
       <header>
         <Navbar></Navbar>
       </header>
-      <main className="">
+      <main>
         <Outlet></Outlet>
       </main>
       <footer>

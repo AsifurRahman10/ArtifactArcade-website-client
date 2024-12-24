@@ -1,12 +1,14 @@
 import google from "../assets/google.png";
 import Lottie from "lottie-react";
 import login from "../../public/login.json";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 export const Login = () => {
   const { handleGoogleLogin, loginWithEmail } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLoginWithEmail = (e) => {
     e.preventDefault();
@@ -15,7 +17,22 @@ export const Login = () => {
     const password = form.password.value;
     loginWithEmail(email, password)
       .then((data) => {
-        console.log(data.user);
+        navigate("/");
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Signed in successfully",
+        });
       })
       .catch((err) => {
         const errorText = err.message.slice(15).replace(/[()]/g, "");
@@ -24,7 +41,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row lg:flex-row items-center justify-center small-text md:w-11/12 mx-auto py-10">
+    <div className="flex flex-col md:flex-row lg:flex-row items-center justify-center small-text md:w-11/12 mx-auto py-10  max-w-screen-2xl">
       <div className="flex-1">
         <div className="p-4 lg:w-7/12 mx-auto bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
           <form className="space-y-6" onSubmit={handleLoginWithEmail}>

@@ -1,14 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import google from "../assets/google.png";
 import Lottie from "lottie-react";
 import register from "../../public/register.json";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
+import Swal from "sweetalert2";
 export const Register = () => {
-  const { handleGoogleLogin, registerWithEmail, addProfile } =
+  const { handleGoogleLogin, registerWithEmail, addProfile, setUser } =
     useContext(AuthContext);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
     setError("");
@@ -38,8 +40,27 @@ export const Register = () => {
           .then((res) => {
             if (res?.data?.data?.display_url) {
               const image = res.data.data.display_url;
-              console.log(image);
-              addProfile(name, image);
+              addProfile(name, image).then((res) => {
+                setUser((prevUser) => {
+                  return { ...prevUser, displayName: name, photoURL: image };
+                });
+                navigate("/");
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: "top-end",
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                  },
+                });
+                Toast.fire({
+                  icon: "success",
+                  title: "Signed in successfully",
+                });
+              });
             }
           });
       })

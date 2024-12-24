@@ -1,14 +1,20 @@
 import React, { useContext, useState } from "react";
 import "flowbite";
 import logo from "../../public/logo.png";
-import { Link, Links, NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 export const Navbar = () => {
   const { user, handleSignOut } = useContext(AuthContext);
-  console.log(user);
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const handleDropDown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+  const handleNavbarOpen = () => {
+    setIsNavbarOpen(!isNavbarOpen);
+  };
   const li = (
     <>
       <NavLink
@@ -18,11 +24,13 @@ export const Navbar = () => {
         <li>Home</li>
       </NavLink>
       <NavLink
+        to="/all-artifacts"
         className={({ isActive }) => (isActive ? "text-custom-btn" : "")}
       >
         <li>All Artifacts</li>
       </NavLink>
       <NavLink
+        to="/add-artifacts"
         className={({ isActive }) => (isActive ? "text-custom-btn" : "")}
       >
         <li>Add Artifacts</li>
@@ -30,25 +38,25 @@ export const Navbar = () => {
     </>
   );
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900 small-text">
-      <div className="flex flex-wrap items-center justify-between p-4 py-6">
+    <nav className="bg-white border-gray-200 dark:bg-gray-900 small-text max-w-screen-2xl mx-auto relative z-40">
+      <div className="flex flex-wrap items-center justify-between p-4">
         {/* Logo */}
-        <img src={logo} className="h-20 w-20" alt="" />
+        <img src={logo} className="h-20 w-20" alt="Logo" />
 
         {/* User Profile Section */}
         {user ? (
-          <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse  translate-x-20 md:translate-x-0">
+          <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse translate-x-20 md:translate-x-0 relative">
             {/* User Menu Button */}
             <button
               type="button"
-              onClick={() => setIsDropdownOpen((prev) => !prev)}
+              onClick={handleDropDown}
               className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
             >
               <span className="sr-only">Open user menu</span>
               <img
                 className="w-16 h-16 rounded-full"
                 src={user?.photoURL}
-                alt="user photo"
+                alt="User photo"
               />
             </button>
 
@@ -95,7 +103,7 @@ export const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          onClick={() => setIsNavbarOpen((prev) => !prev)}
+          onClick={handleNavbarOpen}
           type="button"
           className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
         >
