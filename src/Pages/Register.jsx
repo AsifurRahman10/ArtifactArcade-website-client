@@ -44,6 +44,12 @@ export const Register = () => {
                 setUser((prevUser) => {
                   return { ...prevUser, displayName: name, photoURL: image };
                 });
+                const userData = { name, email };
+                axios
+                  .post("http://localhost:4000/user", userData)
+                  .then((res) => {
+                    console.log(res);
+                  });
                 navigate("/");
                 const Toast = Swal.mixin({
                   toast: true,

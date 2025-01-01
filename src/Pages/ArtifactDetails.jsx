@@ -4,9 +4,11 @@ import { AiOutlineLike } from "react-icons/ai";
 import { MdLocationOff } from "react-icons/md";
 import { FaSearchengin } from "react-icons/fa";
 import axios, { Axios } from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 export const ArtifactDetails = () => {
+  const { user } = useContext(AuthContext);
   const data = useLoaderData();
   const {
     _id,
@@ -29,7 +31,15 @@ export const ArtifactDetails = () => {
       axios
         .patch(`http://localhost:4000/updateLike/${_id}`, updatedLike)
         .then((res) => {
-          console.log(res.data);
+          if (res.data.modifiedCount > 0) {
+            axios
+              .put(`http://localhost:4000/likedArtifacts/${user.email}`, {
+                id: _id,
+              })
+              .then((res) => {
+                console.log(res);
+              });
+          }
         });
 
       return newLiked;

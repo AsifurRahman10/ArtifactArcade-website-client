@@ -9,6 +9,7 @@ import {
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import { auth } from "../Firebase/firebase.init";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -20,7 +21,13 @@ const AuthProvider = ({ children }) => {
   // google login
   const handleGoogleLogin = () => {
     setLoading(true);
-    return signInWithPopup(auth, googleProvider);
+    signInWithPopup(auth, googleProvider).then((res) => {
+      console.log(res);
+      const name = res.user.displayName;
+      const email = res.user.email;
+      const userData = { name, email };
+      axios.post("http://localhost:4000/user", userData).then((res) => {});
+    });
   };
 
   // register with email
