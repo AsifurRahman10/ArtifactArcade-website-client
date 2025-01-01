@@ -35,6 +35,7 @@ export const ArtifactDetails = () => {
             axios
               .put(`http://localhost:4000/likedArtifacts/${user.email}`, {
                 id: _id,
+                image: artifactImage,
               })
               .then((res) => {
                 console.log(res);
