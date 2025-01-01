@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Title } from "../Component/Title";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { AuthContext } from "../Provider/AuthProvider";
 
 export const AddArtifacts = () => {
   const [selectedType, setSelectedType] = useState("");
+  const { user } = useContext(AuthContext);
+  const { displayName, email } = user;
   const handleSelectedType = (e) => {
     setSelectedType(e.target.value);
   };
@@ -28,6 +31,8 @@ export const AddArtifacts = () => {
           const TotalData = {
             ...filteredData,
             image,
+            displayName,
+            email,
             selectedType,
             like: 0,
           };

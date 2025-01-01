@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:4000/artifacts/${params.id}`),
+          fetch(`http://localhost:4000/artifactsDetails/${params.id}`),
       },
       {
         path: "/login",
