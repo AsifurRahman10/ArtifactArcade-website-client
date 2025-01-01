@@ -6,6 +6,7 @@ import { Home } from "../Pages/Home";
 import { AddArtifacts } from "../Pages/AddArtifacts";
 import { PrivateRouter } from "./PrivateRouter";
 import { ArtifactDetails } from "../Pages/ArtifactDetails";
+import { AllArtifacts } from "../Pages/AllArtifacts";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,11 @@ export const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
+        path: "/allArtifacts",
+        element: <AllArtifacts></AllArtifacts>,
+        loader: () => fetch("http://localhost:4000/allArtifacts"),
+      },
+      {
         path: "/add_artifacts",
         element: (
           <PrivateRouter>
@@ -25,7 +31,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/artifacts_details/:id",
+        path: "/artifactsDetails/:id",
         element: (
           <PrivateRouter>
             <ArtifactDetails></ArtifactDetails>

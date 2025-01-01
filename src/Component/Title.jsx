@@ -9,7 +9,7 @@ export const Title = ({ title, para }) => {
         <h2 className="text-white text-4xl sm:text-4xl lg:text-5xl font-bold">
           {title}
         </h2>
-        <p className="mt-4 text-lg sm:text-xl text-gray-300 font-medium leading-relaxed">
+        <p className="mt-4 text-lg sm:text-xl text-gray-300 font-medium leading-relaxed md:w-9/12 mx-auto">
           {para}
         </p>
       </div>

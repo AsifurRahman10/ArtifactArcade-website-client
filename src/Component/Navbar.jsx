@@ -24,7 +24,7 @@ export const Navbar = () => {
         <li>Home</li>
       </NavLink>
       <NavLink
-        to="/all-artifacts"
+        to="/allArtifacts"
         className={({ isActive }) => (isActive ? "text-custom-btn" : "")}
       >
         <li>All Artifacts</li>
