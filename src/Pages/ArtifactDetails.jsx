@@ -3,12 +3,14 @@ import { Title } from "../Component/Title";
 import { AiOutlineLike } from "react-icons/ai";
 import { MdLocationOff } from "react-icons/md";
 import { FaSearchengin } from "react-icons/fa";
+import axios, { Axios } from "axios";
+import { useState } from "react";
 
 export const ArtifactDetails = () => {
   const data = useLoaderData();
   const {
+    _id,
     ArtifactName,
-    Like,
     PresentLocation,
     DiscoveredBy,
     DiscoveredAt,
@@ -16,9 +18,25 @@ export const ArtifactDetails = () => {
     HistoricalContext,
     ArtifactType,
     ArtifactImage,
+    like,
   } = data;
+  const [liked, setLiked] = useState(like);
+  const handleLike = () => {
+    setLiked((prevLiked) => {
+      const newLiked = prevLiked + 1;
+      const updatedLike = { like: newLiked };
+
+      axios
+        .patch(`http://localhost:4000/updateLike/${_id}`, updatedLike)
+        .then((res) => {
+          console.log(res.data);
+        });
+
+      return newLiked;
+    });
+  };
   return (
-    <div className="pb-10">
+    <div className="pb-0 md:pb-10">
       <Title title={"Artifacts Details"} />
       <div className="w-11/12 lg:w-9/12 mx-auto mt-10">
         {/* heading */}
@@ -26,9 +44,11 @@ export const ArtifactDetails = () => {
           <h2 className="text-3xl font-bold text-custom-btn">{ArtifactName}</h2>
           <div>
             <p className="text-gray-600 flex items-center gap-2">
-              <span className="font-semibold">Total Likes: {Like}</span>
+              <span className="font-semibold text-lg">
+                Total Likes: {liked}
+              </span>
               <span className="ml-2 flex items-center">
-                <button className="">
+                <button className="btn" onClick={handleLike}>
                   <AiOutlineLike className="text-blue-500 mr-1 text-3xl" />
                 </button>
               </span>
@@ -63,7 +83,7 @@ export const ArtifactDetails = () => {
           </h3>
         </div>
         {/* Location */}
-        <div className="flex items-center space-x-10 mt-2">
+        <div className="flex flex-col md:flex-row md:items-center md:space-x-10 mt-2">
           <h3 className="flex items-center text-gray-800 font-semibold">
             <MdLocationOff className="text-red-500 w-5 h-5" />
             <span className="ml-2">
