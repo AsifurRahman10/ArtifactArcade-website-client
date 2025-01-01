@@ -14,7 +14,7 @@ export const AllArtifacts = () => {
       ></Title>
       <div className="w-11/12 lg:w-9/12 mx-auto my-10 md:my-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {allArtifactsData.map((item) => (
-          <Card item={item}></Card>
+          <Card key={item._id} item={item}></Card>
         ))}
       </div>
     </div>
