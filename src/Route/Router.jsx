@@ -4,6 +4,7 @@ import { Login } from "../Pages/Login";
 import { Register } from "../Pages/Register";
 import { Home } from "../Pages/Home";
 import { AddArtifacts } from "../Pages/AddArtifacts";
+import { PrivateRouter } from "./PrivateRouter";
 
 export const router = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/add_artifacts",
-        element: <AddArtifacts></AddArtifacts>,
+        element: (
+          <PrivateRouter>
+            <AddArtifacts></AddArtifacts>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/login",

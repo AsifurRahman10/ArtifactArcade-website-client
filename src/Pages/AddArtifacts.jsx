@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Title } from "../Component/Title";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const AddArtifacts = () => {
   const [selectedType, setSelectedType] = useState("");
@@ -28,11 +29,19 @@ export const AddArtifacts = () => {
             ...filteredData,
             image,
             selectedType,
+            like: 0,
           };
           axios
             .post("http://localhost:4000/addArtifacts", TotalData)
-            .then((res) => {
-              console.log(res);
+            .then((data) => {
+              if (data.data.insertedId) {
+                Swal.fire({
+                  title: "Successful",
+                  text: "You information has been added",
+                  icon: "success",
+                });
+                form.reset();
+              }
             });
         }
       });
