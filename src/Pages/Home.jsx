@@ -7,6 +7,7 @@ export const Home = () => {
       <section>
         <Banner></Banner>
       </section>
+      <section></section>
     </div>
   );
 };

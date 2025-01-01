@@ -5,6 +5,7 @@ import { Register } from "../Pages/Register";
 import { Home } from "../Pages/Home";
 import { AddArtifacts } from "../Pages/AddArtifacts";
 import { PrivateRouter } from "./PrivateRouter";
+import { ArtifactDetails } from "../Pages/ArtifactDetails";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,16 @@ export const router = createBrowserRouter([
             <AddArtifacts></AddArtifacts>
           </PrivateRouter>
         ),
+      },
+      {
+        path: "/artifacts_details/:id",
+        element: (
+          <PrivateRouter>
+            <ArtifactDetails></ArtifactDetails>
+          </PrivateRouter>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:4000/artifacts/${params.id}`),
       },
       {
         path: "/login",
