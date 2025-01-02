@@ -9,6 +9,7 @@ import { ArtifactDetails } from "../Pages/ArtifactDetails";
 import { AllArtifacts } from "../Pages/AllArtifacts";
 import { LikedArtifacts } from "../Pages/LikedArtifacts";
 import { MyArtifacts } from "../Pages/MyArtifacts";
+import { UpdateArtifacts } from "../Pages/UpdateArtifacts";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,16 @@ export const router = createBrowserRouter([
             <MyArtifacts></MyArtifacts>
           </PrivateRouter>
         ),
+      },
+      {
+        path: "/updateArtifact/:id",
+        element: (
+          <PrivateRouter>
+            <UpdateArtifacts></UpdateArtifacts>
+          </PrivateRouter>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:4000/artifactsDetails/${params.id}`),
       },
       {
         path: "/artifactsDetails/:id",

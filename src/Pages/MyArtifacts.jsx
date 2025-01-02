@@ -15,6 +15,7 @@ export const MyArtifacts = () => {
         setMyArtifacts(res.data);
       });
   }, []);
+
   return (
     <div>
       <Title
@@ -23,7 +24,11 @@ export const MyArtifacts = () => {
       ></Title>
       <div className="w-11/12 lg:w-9/12 mx-auto my-10 grid grid-cols-1 gap-6">
         {myArtifacts.map((item) => (
-          <MyArtifactsCard key={item._id} item={item}></MyArtifactsCard>
+          <MyArtifactsCard
+            key={item._id}
+            item={item}
+            setMyArtifacts={setMyArtifacts}
+          ></MyArtifactsCard>
         ))}
       </div>
     </div>
