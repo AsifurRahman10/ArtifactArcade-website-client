@@ -1,5 +1,6 @@
 import React from "react";
 import { Banner } from "../Component/Banner";
+import { FeatureArtifacts } from "../Component/FeatureArtifacts";
 
 export const Home = () => {
   return (
@@ -7,7 +8,9 @@ export const Home = () => {
       <section>
         <Banner></Banner>
       </section>
-      <section></section>
+      <section>
+        <FeatureArtifacts></FeatureArtifacts>
+      </section>
     </div>
   );
 };
