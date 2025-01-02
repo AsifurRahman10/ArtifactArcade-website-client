@@ -6,6 +6,7 @@ import { FaSearchengin } from "react-icons/fa";
 import axios, { Axios } from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 export const ArtifactDetails = () => {
   const { user } = useContext(AuthContext);
@@ -48,6 +49,11 @@ export const ArtifactDetails = () => {
   };
   return (
     <div className="pb-0 md:pb-10">
+      <HelmetProvider>
+        <Helmet>
+          <title>{artifactName} - ArtifactArcade</title>
+        </Helmet>
+      </HelmetProvider>
       <Title title={"Artifacts Details"} />
       <div className="w-11/12 lg:w-9/12 mx-auto mt-10">
         {/* heading */}

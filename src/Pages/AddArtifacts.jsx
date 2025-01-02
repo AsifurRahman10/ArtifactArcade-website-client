@@ -3,6 +3,7 @@ import { Title } from "../Component/Title";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 export const AddArtifacts = () => {
   const [selectedType, setSelectedType] = useState("");
@@ -54,6 +55,11 @@ export const AddArtifacts = () => {
   };
   return (
     <div>
+      <HelmetProvider>
+        <Helmet>
+          <title>Add Artifacts - ArtifactArcade</title>
+        </Helmet>
+      </HelmetProvider>
       <Title
         title={"Add Artifacts"}
         para={

@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import loadingImg from "../../public/loading.json";
 import { AuthContext } from "../Provider/AuthProvider";
 
 export const PrivateRouter = ({ children }) => {
   const { loading, user } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const location = useLocation();
   if (loading) {
     return (
       <div className="mix-h-screen w-full">
@@ -19,7 +19,9 @@ export const PrivateRouter = ({ children }) => {
     );
   }
   if (!user) {
-    navigate("/login");
+    return (
+      <Navigate state={{ from: location.pathname }} to={"/login"}></Navigate>
+    );
   }
 
   return <div>{children}</div>;

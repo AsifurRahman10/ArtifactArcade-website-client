@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 export const Register = () => {
   const { handleGoogleLogin, registerWithEmail, addProfile, setUser } =
     useContext(AuthContext);
@@ -75,8 +76,24 @@ export const Register = () => {
         setError(errorText);
       });
   };
+
+  const handleGoogleLoginBtn = (e) => {
+    handleGoogleLogin().then((res) => {
+      const name = res.user.displayName;
+      const email = res.user.email;
+      const userData = { name, email };
+      axios.post("http://localhost:4000/user", userData).then((res) => {
+        navigate("/");
+      });
+    });
+  };
   return (
     <div>
+      <HelmetProvider>
+        <Helmet>
+          <title>Register - ArtifactArcade</title>
+        </Helmet>
+      </HelmetProvider>
       <div className="flex flex-col md:flex-row lg:flex-row items-center justify-center small-text md:w-11/12 mx-auto py-10">
         <div className="flex-1">
           <div className="p-4 lg:w-7/12 mx-auto bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -141,7 +158,7 @@ export const Register = () => {
               </button>
               {error && <p className="text-red-500">{error}</p>}
               <button
-                onClick={handleGoogleLogin}
+                onClick={handleGoogleLoginBtn}
                 type="submit"
                 className="w-full text-white bg-custom-btn hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-2 justify-center"
               >

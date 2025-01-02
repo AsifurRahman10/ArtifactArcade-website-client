@@ -3,6 +3,7 @@ import { Title } from "../Component/Title";
 import axios from "axios";
 import { AuthContext } from "../Provider/AuthProvider";
 import { MyArtifactsCard } from "../Component/MyArtifactsCard";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 export const MyArtifacts = () => {
   const { user } = useContext(AuthContext);
@@ -18,6 +19,11 @@ export const MyArtifacts = () => {
 
   return (
     <div>
+      <HelmetProvider>
+        <Helmet>
+          <title>My Artifacts - ArtifactArcade</title>
+        </Helmet>
+      </HelmetProvider>
       <Title
         title={"My Artifacts"}
         para={"Discover all the artifacts you’ve contributed."}

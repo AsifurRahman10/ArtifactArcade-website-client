@@ -1,13 +1,17 @@
 import google from "../assets/google.png";
 import Lottie from "lottie-react";
 import login from "../../public/login.json";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import axios from "axios";
 export const Login = () => {
   const { handleGoogleLogin, loginWithEmail } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const location = useLocation();
+  console.log(location);
   const navigate = useNavigate();
 
   const handleLoginWithEmail = (e) => {
@@ -17,7 +21,6 @@ export const Login = () => {
     const password = form.password.value;
     loginWithEmail(email, password)
       .then((data) => {
-        navigate("/");
         const Toast = Swal.mixin({
           toast: true,
           position: "top-end",
@@ -33,6 +36,10 @@ export const Login = () => {
           icon: "success",
           title: "Signed in successfully",
         });
+        if (location.state) {
+          return navigate(location.state.from);
+        }
+        navigate("/");
       })
       .catch((err) => {
         const errorText = err.message.slice(15).replace(/[()]/g, "");
@@ -40,8 +47,27 @@ export const Login = () => {
       });
   };
 
+  const handleGoogleLoginBtn = (e) => {
+    handleGoogleLogin().then((res) => {
+      const name = res.user.displayName;
+      const email = res.user.email;
+      const userData = { name, email };
+      axios.post("http://localhost:4000/user", userData).then((res) => {
+        if (location.state) {
+          return navigate(location.state.from);
+        }
+        navigate("/");
+      });
+    });
+  };
+
   return (
     <div className="flex flex-col md:flex-row lg:flex-row items-center justify-center small-text md:w-11/12 mx-auto py-10  max-w-screen-2xl">
+      <HelmetProvider>
+        <Helmet>
+          <title>Login - ArtifactArcade</title>
+        </Helmet>
+      </HelmetProvider>
       <div className="flex-1">
         <div className="p-4 lg:w-7/12 mx-auto bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
           <form className="space-y-6" onSubmit={handleLoginWithEmail}>
@@ -102,7 +128,7 @@ export const Login = () => {
               Login
             </button>
             <button
-              onClick={handleGoogleLogin}
+              onClick={handleGoogleLoginBtn}
               type="submit"
               className="w-full text-white bg-custom-btn hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-2 justify-center"
             >

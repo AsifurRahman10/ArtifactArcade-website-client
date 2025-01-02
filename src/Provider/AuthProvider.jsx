@@ -10,6 +10,7 @@ import {
 import React, { createContext, useEffect, useState } from "react";
 import { auth } from "../Firebase/firebase.init";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -21,13 +22,7 @@ const AuthProvider = ({ children }) => {
   // google login
   const handleGoogleLogin = () => {
     setLoading(true);
-    signInWithPopup(auth, googleProvider).then((res) => {
-      console.log(res);
-      const name = res.user.displayName;
-      const email = res.user.email;
-      const userData = { name, email };
-      axios.post("http://localhost:4000/user", userData).then((res) => {});
-    });
+    return signInWithPopup(auth, googleProvider);
   };
 
   // register with email

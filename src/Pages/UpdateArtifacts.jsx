@@ -47,6 +47,11 @@ export const UpdateArtifacts = () => {
   };
   return (
     <div>
+      <HelmetProvider>
+        <Helmet>
+          <title>Update Artifacts - ArtifactArcade</title>
+        </Helmet>
+      </HelmetProvider>
       <Title
         title={"Update Artifacts"}
         para={

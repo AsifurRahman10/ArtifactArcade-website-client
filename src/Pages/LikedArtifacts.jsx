@@ -3,6 +3,7 @@ import { Title } from "../Component/Title";
 import axios from "axios";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Link } from "react-router-dom";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 export const LikedArtifacts = () => {
   const { user } = useContext(AuthContext);
@@ -27,6 +28,11 @@ export const LikedArtifacts = () => {
   }
   return (
     <div>
+      <HelmetProvider>
+        <Helmet>
+          <title>Liked Artifacts - ArtifactArcade</title>
+        </Helmet>
+      </HelmetProvider>
       <Title
         title={"Liked Artifacts"}
         para={

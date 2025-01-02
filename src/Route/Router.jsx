@@ -10,6 +10,7 @@ import { AllArtifacts } from "../Pages/AllArtifacts";
 import { LikedArtifacts } from "../Pages/LikedArtifacts";
 import { MyArtifacts } from "../Pages/MyArtifacts";
 import { UpdateArtifacts } from "../Pages/UpdateArtifacts";
+import { Error } from "../Pages/Error";
 
 export const router = createBrowserRouter([
   {
@@ -78,5 +79,9 @@ export const router = createBrowserRouter([
         element: <Register></Register>,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <Error></Error>,
   },
 ]);

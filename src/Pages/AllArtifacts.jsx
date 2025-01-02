@@ -1,11 +1,17 @@
 import { useLoaderData } from "react-router-dom";
 import { Title } from "../Component/Title";
 import { Card } from "../Component/Card";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 export const AllArtifacts = () => {
   const allArtifactsData = useLoaderData();
   return (
     <div>
+      <HelmetProvider>
+        <Helmet>
+          <title>All Artifacts - ArtifactArcade</title>
+        </Helmet>
+      </HelmetProvider>
       <Title
         title={"All Artifacts"}
         para={

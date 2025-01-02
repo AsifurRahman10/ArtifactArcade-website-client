@@ -13,7 +13,7 @@ export const PhotoGallery = () => {
           Gallery
         </p>
         <h2 className="text-5xl font-extrabold title-text">
-          Explore The Collection
+          Explore Our Collection
         </h2>
       </div>
       <div>
