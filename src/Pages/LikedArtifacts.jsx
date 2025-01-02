@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export const LikedArtifacts = () => {
   const { user } = useContext(AuthContext);
   const [likedData, setLikeData] = useState([]);
-  console.log(likedData);
+
   useEffect(() => {
     axios
       .get(`http://localhost:4000/likedArtifacts?email=${user.email}`)
@@ -15,6 +15,16 @@ export const LikedArtifacts = () => {
         setLikeData(res.data.likedArtifacts);
       });
   }, []);
+
+  if (!likedData) {
+    return (
+      <div className="w-11/12 lg:w-9/12 mx-auto md:min-h-[calc(100vh-20rem)]">
+        <h2 className="mt-10 text-2xl font-semibold text-center text-gray-700">
+          You haven’t liked any artifacts yet
+        </h2>
+      </div>
+    );
+  }
   return (
     <div>
       <Title
