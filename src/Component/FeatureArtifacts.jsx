@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FeatureCard } from "./FeatureCard";
+import { Link } from "react-router-dom";
 
 export const FeatureArtifacts = () => {
   const [data, setData] = useState([]);
@@ -24,6 +25,11 @@ export const FeatureArtifacts = () => {
           <FeatureCard key={item._id} item={item}></FeatureCard>
         ))}
       </div>
+      <Link to={"/allArtifacts"}>
+        <button className="mt-10 px-6 py-2 block border hover:bg-custom-btn hover:text-white rounded mx-auto transition-all duration-500 ease-in-out hover:scale-105">
+          View all Artifacts
+        </button>
+      </Link>
     </div>
   );
 };

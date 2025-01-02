@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const FeatureCard = ({ item }) => {
   const { _id, artifactName, like, historicalContext, artifactImage } = item;
   return (
-    <div className="relative group w-10/12 mx-auto">
+    <div className="relative group">
       <img
         src={artifactImage}
         className="h-[360px] w-full object-fill transition-transform duration-500 ease-in-out group-hover:scale-105"
@@ -21,7 +21,7 @@ export const FeatureCard = ({ item }) => {
           <span className="text-lg">{like}</span>
         </p>
         <Link
-          to={`/artifactDetails/${_id}`}
+          to={`/artifactsDetails/${_id}`}
           className="mt-4 absolute -bottom-5 bg-custom-btn font-semibold text-white px-4 py-2 rounded hover:bg-blue-700 transition-all duration-500 ease-in-out group-hover:translate-y-2"
         >
           View Details
