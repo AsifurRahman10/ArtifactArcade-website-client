@@ -65,6 +65,9 @@ const AuthProvider = ({ children }) => {
           { withCredentials: true }
         );
       } else {
+        const { data } = await axios.get("http://localhost:4000/logout", {
+          withCredentials: true,
+        });
         setUser(currentUser);
       }
       setLoading(false);
