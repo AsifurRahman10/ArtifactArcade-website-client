@@ -39,7 +39,9 @@ export const AddArtifacts = () => {
             like: 0,
           };
           axios
-            .post("http://localhost:4000/addArtifacts", TotalData)
+            .post("http://localhost:4000/addArtifacts", TotalData, {
+              withCredentials: true,
+            })
             .then((data) => {
               if (data.data.insertedId) {
                 Swal.fire({

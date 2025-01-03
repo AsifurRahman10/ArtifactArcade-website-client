@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import { Title } from "../Component/Title";
-import { AiOutlineLike } from "react-icons/ai";
+import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { MdLocationOff } from "react-icons/md";
 import { FaSearchengin } from "react-icons/fa";
 import axios, { Axios } from "axios";
@@ -24,9 +24,40 @@ export const ArtifactDetails = () => {
     like,
   } = data;
   const [liked, setLiked] = useState(like);
+  const [likeToggle, setLikeToggle] = useState(false);
   const handleLike = () => {
+    setLikeToggle(!likeToggle);
     setLiked((prevLiked) => {
       const newLiked = prevLiked + 1;
+      const updatedLike = { like: newLiked };
+
+      axios
+        .patch(`http://localhost:4000/updateLike/${_id}`, updatedLike)
+        .then((res) => {
+          if (res.data.modifiedCount > 0) {
+            axios
+              .put(
+                `http://localhost:4000/likedArtifacts/${user.email}`,
+                {
+                  id: _id,
+                  image: artifactImage,
+                },
+                { withCredentials: true }
+              )
+              .then((res) => {
+                console.log(res);
+              });
+          }
+        });
+
+      return newLiked;
+    });
+  };
+
+  const handleDisLike = () => {
+    setLikeToggle(!likeToggle);
+    setLiked((prevLiked) => {
+      const newLiked = prevLiked - 1;
       const updatedLike = { like: newLiked };
 
       axios
@@ -69,9 +100,15 @@ export const ArtifactDetails = () => {
                 Total Likes: {liked}
               </span>
               <span className="ml-2 flex items-center">
-                <button className="btn" onClick={handleLike}>
-                  <AiOutlineLike className="text-blue-500 mr-1 text-3xl" />
-                </button>
+                {likeToggle ? (
+                  <button className="btn" onClick={handleDisLike}>
+                    <AiOutlineDislike className="text-blue-500 mr-1 text-3xl" />
+                  </button>
+                ) : (
+                  <button className="btn" onClick={handleLike}>
+                    <AiOutlineLike className="text-blue-500 mr-1 text-3xl" />
+                  </button>
+                )}
               </span>
             </p>
           </div>
