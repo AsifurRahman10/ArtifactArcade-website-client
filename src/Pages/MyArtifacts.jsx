@@ -11,7 +11,9 @@ export const MyArtifacts = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/myArtifacts?email=${user.email}`)
+      .get(`http://localhost:4000/myArtifacts?email=${user.email}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setMyArtifacts(res.data);
       });

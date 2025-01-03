@@ -11,7 +11,9 @@ export const LikedArtifacts = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/likedArtifacts?email=${user.email}`)
+      .get(`http://localhost:4000/likedArtifacts?email=${user.email}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setLikeData(res.data.likedArtifacts);
       });

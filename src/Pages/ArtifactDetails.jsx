@@ -34,10 +34,14 @@ export const ArtifactDetails = () => {
         .then((res) => {
           if (res.data.modifiedCount > 0) {
             axios
-              .put(`http://localhost:4000/likedArtifacts/${user.email}`, {
-                id: _id,
-                image: artifactImage,
-              })
+              .put(
+                `http://localhost:4000/likedArtifacts/${user.email}`,
+                {
+                  id: _id,
+                  image: artifactImage,
+                },
+                { withCredentials: true }
+              )
               .then((res) => {
                 console.log(res);
               });
