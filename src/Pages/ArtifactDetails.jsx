@@ -23,12 +23,9 @@ export const ArtifactDetails = () => {
     artifactImage,
     like,
   } = data;
-  console.log(like);
 
   const [liked, setLiked] = useState(like || 0);
-  console.log(liked);
   const [likeToggle, setLikeToggle] = useState(false);
-  console.log(likeToggle);
 
   useEffect(() => {
     if (user?.email) {
@@ -72,16 +69,11 @@ export const ArtifactDetails = () => {
                 { withCredentials: true }
               )
               .then((res) => {
-                console.log(res);
                 setLikeToggle(true);
                 setLiked(newLiked);
-              })
-              .catch((err) =>
-                console.error("Error adding to liked artifacts:", err)
-              );
+              });
           }
-        })
-        .catch((err) => console.error("Error updating like count:", err));
+        });
     }
   };
 

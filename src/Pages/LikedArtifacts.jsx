@@ -8,7 +8,6 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 export const LikedArtifacts = () => {
   const { user } = useContext(AuthContext);
   const [likedData, setLikeData] = useState([]);
-  console.log(likedData);
 
   useEffect(() => {
     axios
