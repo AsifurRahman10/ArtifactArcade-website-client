@@ -34,7 +34,7 @@ export const AboutUs = () => {
         </div>
       </div>
       <motion.div
-        className="absolute -top-32 right-4 opacity-50"
+        className="absolute -bottom-52 lg:bottom-0 lg:-top-32 right-4 opacity-50 hidden md:block"
         animate={{
           y: [0, -10, 0],
         }}
