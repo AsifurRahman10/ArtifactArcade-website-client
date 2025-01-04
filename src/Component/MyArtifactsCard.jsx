@@ -1,11 +1,12 @@
 import axios from "axios";
 import { AiOutlineLike } from "react-icons/ai";
 import { MdBrowserUpdated, MdDeleteOutline } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export const MyArtifactsCard = ({ item, setMyArtifacts }) => {
   const { _id, artifactName, artifactImage, artifactType, like } = item;
+  const navigate = useNavigate();
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure you want to delete it?",
@@ -24,13 +25,14 @@ export const MyArtifactsCard = ({ item, setMyArtifacts }) => {
               setMyArtifacts((prev) =>
                 prev.filter((artifacts) => artifacts._id !== _id)
               );
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your artifacts has been deleted.",
+                icon: "success",
+              });
+              navigate("/allArtifacts");
             }
           });
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your artifacts has been deleted.",
-          icon: "success",
-        });
       }
     });
   };

@@ -8,6 +8,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 export const LikedArtifacts = () => {
   const { user } = useContext(AuthContext);
   const [likedData, setLikeData] = useState([]);
+  console.log(likedData);
 
   useEffect(() => {
     axios
@@ -19,7 +20,7 @@ export const LikedArtifacts = () => {
       });
   }, []);
 
-  if (!likedData) {
+  if (!likedData || likedData.length === 0) {
     return (
       <div className="w-11/12 lg:w-9/12 mx-auto md:min-h-[calc(100vh-20rem)]">
         <h2 className="mt-10 text-2xl font-semibold text-center text-gray-700">

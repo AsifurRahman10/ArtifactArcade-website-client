@@ -17,7 +17,7 @@ export const PhotoGallery = () => {
         </h2>
       </div>
       <div>
-        <div className="grid grid-cols-2 md:grid-cols-3 mt-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20">
           <div className="h-[400px] w-full overflow-hidden">
             <img
               className="h-full w-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"

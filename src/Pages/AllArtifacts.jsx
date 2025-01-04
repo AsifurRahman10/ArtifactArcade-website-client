@@ -2,8 +2,11 @@ import { useLoaderData } from "react-router-dom";
 import { Title } from "../Component/Title";
 import { Card } from "../Component/Card";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { AuthContext } from "../Provider/AuthProvider";
+import Lottie from "lottie-react";
+import loadingImg from "../../public/loading.json";
 
 export const AllArtifacts = () => {
   const [allArtifactsData, setAllArtifactsData] = useState([]);
@@ -30,7 +33,7 @@ export const AllArtifacts = () => {
         }
       ></Title>
       <div className="w-11/12 lg:w-9/12 flex justify-end items-center my-10 mx-auto">
-        <form className="w-1/3 ml-auto">
+        <form className="w-7/12 md:w-1/3 ml-auto">
           <label
             htmlFor="default-search"
             className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"

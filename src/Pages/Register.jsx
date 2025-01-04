@@ -81,7 +81,8 @@ export const Register = () => {
     handleGoogleLogin().then((res) => {
       const name = res.user.displayName;
       const email = res.user.email;
-      const userData = { name, email };
+      const likedArtifacts = [];
+      const userData = { name, email, likedArtifacts };
       axios.post("http://localhost:4000/user", userData).then((res) => {
         navigate("/");
       });
@@ -95,7 +96,7 @@ export const Register = () => {
         </Helmet>
       </HelmetProvider>
       <div className="flex flex-col md:flex-row lg:flex-row items-center justify-center small-text md:w-11/12 mx-auto py-10">
-        <div className="flex-1">
+        <div className="flex-1 w-11/12 mx-auto">
           <div className="p-4 lg:w-7/12 mx-auto bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
             <form className="space-y-6" onSubmit={handleRegister}>
               <h5 className="text-2xl font-medium text-gray-900 dark:text-white title-text">

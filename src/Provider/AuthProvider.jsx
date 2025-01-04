@@ -64,11 +64,13 @@ const AuthProvider = ({ children }) => {
           },
           { withCredentials: true }
         );
+        setLoading(false);
       } else {
         const { data } = await axios.get("http://localhost:4000/logout", {
           withCredentials: true,
         });
         setUser(currentUser);
+        setLoading(false);
       }
       setLoading(false);
     });
@@ -83,6 +85,7 @@ const AuthProvider = ({ children }) => {
     handleSignOut,
     setUser,
     loading,
+    setLoading,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

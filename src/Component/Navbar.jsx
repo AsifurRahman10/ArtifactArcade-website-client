@@ -42,11 +42,13 @@ export const Navbar = () => {
     <nav className="bg-white border-gray-200 dark:bg-gray-900 small-text max-w-screen-2xl mx-auto relative z-40">
       <div className="flex flex-wrap items-center justify-between p-4">
         {/* Logo */}
-        <img src={logo} className="h-20 w-20" alt="Logo" />
+        <Link to={"/"}>
+          <img src={logo} className="h-20 w-20" alt="Logo" />
+        </Link>
 
         {/* User Profile Section */}
         {user ? (
-          <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse translate-x-20 md:translate-x-0 relative">
+          <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse translate-x-20 md:translate-x-0 relative mr-0 md:mr-14 lg:mr-0">
             {/* User Menu Button */}
             <button
               type="button"
@@ -63,7 +65,7 @@ export const Navbar = () => {
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div className="z-50 absolute -right-10 top-20 md:right-10 md:top-20 lg:-right-16 lg:top-20 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+              <div className="z-50 absolute w-[200px] -right-16 md:-right-16 top-20 md:top-20 lg:-right-16 lg:top-20 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
                 <div className="px-4 py-3">
                   <span className="block text-sm text-gray-900 dark:text-white">
                     {user?.displayName}
@@ -101,7 +103,7 @@ export const Navbar = () => {
         ) : (
           <div className="flex items-center translate-x-16 md:translate-x-0 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <Link to="/login">
-              <button className="btn bg-custom-btn text-white px-8 rounded-none font-bold">
+              <button className="bg-custom-btn text-white px-8 py-2 font-bold rounded-none hover:bg-custom-btn-dark transition-all">
                 Login
               </button>
             </Link>

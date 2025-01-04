@@ -19,6 +19,16 @@ export const MyArtifacts = () => {
       });
   }, []);
 
+  if (!myArtifacts || myArtifacts.length === 0) {
+    return (
+      <div className="w-11/12 lg:w-9/12 mx-auto md:min-h-[calc(100vh-20rem)]">
+        <h2 className="mt-10 text-2xl font-semibold text-center text-gray-700">
+          You haven’t added any artifacts yet
+        </h2>
+      </div>
+    );
+  }
+
   return (
     <div>
       <HelmetProvider>

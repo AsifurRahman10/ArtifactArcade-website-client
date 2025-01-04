@@ -20,13 +20,13 @@ export const FeatureArtifacts = () => {
           Featured Artifacts
         </h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-20 mt-10 md:mt-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-20 mt-10 md:mt-20">
         {data.map((item) => (
           <FeatureCard key={item._id} item={item}></FeatureCard>
         ))}
       </div>
       <Link to={"/allArtifacts"}>
-        <button className="mt-10 px-6 py-2 block border hover:bg-custom-btn hover:text-white rounded mx-auto transition-all duration-500 ease-in-out hover:scale-105">
+        <button className="mt-10 md:mt-20 px-6 py-2 block border hover:bg-custom-btn hover:text-white rounded mx-auto transition-all duration-500 ease-in-out hover:scale-105">
           View all Artifacts
         </button>
       </Link>

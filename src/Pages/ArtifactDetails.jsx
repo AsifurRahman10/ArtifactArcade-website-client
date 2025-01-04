@@ -3,7 +3,7 @@ import { Title } from "../Component/Title";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { MdLocationOff } from "react-icons/md";
 import { FaSearchengin } from "react-icons/fa";
-import axios, { Axios } from "axios";
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -23,28 +23,42 @@ export const ArtifactDetails = () => {
     artifactImage,
     like,
   } = data;
-  const [liked, setLiked] = useState(false);
+  console.log(like);
+
+  const [liked, setLiked] = useState(like || 0);
+  console.log(liked);
   const [likeToggle, setLikeToggle] = useState(false);
+  console.log(likeToggle);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:4000/likedArtifacts?email=${user.email}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        const alreadyLiked = res.data.likedArtifacts.find(
-          (item) => item.id === _id
-        );
-        if (alreadyLiked) {
-          setLiked(true);
-          setLikeToggle(true);
-        }
-      });
-  }, [user.email, _id]);
+    if (user?.email) {
+      axios
+        .get(`http://localhost:4000/likedArtifacts?email=${user.email}`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          const alreadyLiked = res.data.likedArtifacts?.find(
+            (item) => item.id === _id
+          );
+          if (alreadyLiked) {
+            setLikeToggle(true);
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching liked artifacts:", err);
+        });
+    }
+  }, [user?.email, _id]);
+
+  // Handle like action
   const handleLike = () => {
-    setLikeToggle(!likeToggle);
-    setLiked((prevLiked) => {
-      const newLiked = prevLiked + 1;
+    if (!user?.email) {
+      alert("You must be logged in to like an artifact!");
+      return;
+    }
+
+    if (!likeToggle) {
+      const newLiked = liked + 1;
       const updatedLike = { like: newLiked };
 
       axios
@@ -54,26 +68,32 @@ export const ArtifactDetails = () => {
             axios
               .put(
                 `http://localhost:4000/likedArtifacts/${user.email}`,
-                {
-                  id: _id,
-                  image: artifactImage,
-                },
+                { id: _id, image: artifactImage },
                 { withCredentials: true }
               )
               .then((res) => {
                 console.log(res);
-              });
+                setLikeToggle(true);
+                setLiked(newLiked);
+              })
+              .catch((err) =>
+                console.error("Error adding to liked artifacts:", err)
+              );
           }
-        });
-
-      return newLiked;
-    });
+        })
+        .catch((err) => console.error("Error updating like count:", err));
+    }
   };
 
-  const handleDisLike = () => {
-    setLikeToggle(!likeToggle);
-    setLiked((prevLiked) => {
-      const newLiked = prevLiked - 1;
+  // Handle dislike action
+  const handleDislike = () => {
+    if (!user?.email) {
+      alert("You must be logged in to dislike an artifact!");
+      return;
+    }
+
+    if (likeToggle) {
+      const newLiked = liked - 1;
       const updatedLike = { like: newLiked };
 
       axios
@@ -81,23 +101,23 @@ export const ArtifactDetails = () => {
         .then((res) => {
           if (res.data.modifiedCount > 0) {
             axios
-              .put(
-                `http://localhost:4000/likedArtifacts/${user.email}`,
-                {
-                  id: _id,
-                  image: artifactImage,
-                },
+              .delete(
+                `http://localhost:4000/likedArtifacts/${user.email}/${_id}`,
                 { withCredentials: true }
               )
-              .then((res) => {
-                console.log(res);
-              });
+              .then(() => {
+                setLikeToggle(false);
+                setLiked(newLiked);
+              })
+              .catch((err) =>
+                console.error("Error removing from liked artifacts:", err)
+              );
           }
-        });
-
-      return newLiked;
-    });
+        })
+        .catch((err) => console.error("Error updating like count:", err));
+    }
   };
+
   return (
     <div className="pb-0 md:pb-10">
       <HelmetProvider>
@@ -105,10 +125,10 @@ export const ArtifactDetails = () => {
           <title>{artifactName} - ArtifactArcade</title>
         </Helmet>
       </HelmetProvider>
-      <Title title={"Artifacts Details"} />
+      <Title title={"Artifact Details"} />
       <div className="w-11/12 lg:w-9/12 mx-auto mt-10">
-        {/* heading */}
-        <div className="flex items-center justify-between">
+        {/* Heading */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
           <h2 className="text-3xl font-bold text-custom-btn">{artifactName}</h2>
           <div>
             <p className="text-gray-600 flex items-center gap-2">
@@ -117,7 +137,7 @@ export const ArtifactDetails = () => {
               </span>
               <span className="ml-2 flex items-center">
                 {likeToggle ? (
-                  <button className="btn" onClick={handleDisLike}>
+                  <button className="btn" onClick={handleDislike}>
                     <AiOutlineDislike className="text-blue-500 mr-1 text-3xl" />
                   </button>
                 ) : (
@@ -129,7 +149,7 @@ export const ArtifactDetails = () => {
             </p>
           </div>
         </div>
-        {/* img */}
+        {/* Image */}
         <div className="mt-6">
           <img
             className="h-full md:h-[400px] w-full object-cover"
@@ -141,17 +161,15 @@ export const ArtifactDetails = () => {
         <p className="text-gray-700 text-base leading-relaxed mt-8">
           {historicalContext}
         </p>
-        {/* Type of Artifact */}
+        {/* Additional Information */}
         <div className="flex flex-col space-y-1 mt-4">
           <h3 className="text-gray-800 font-semibold">
             <span className="text-gray-500">Type of Artifact:</span>{" "}
             {artifactType}
           </h3>
-          {/* Discovered By */}
           <h3 className="text-gray-800 font-semibold mt-4">
             <span className="text-gray-500">Discovered By:</span> {discoveredBy}
           </h3>
-          {/* Created At */}
           <h3 className="text-gray-800 font-semibold mt-4">
             <span className="text-gray-500">Created At:</span> {createdAt}
           </h3>
@@ -165,7 +183,6 @@ export const ArtifactDetails = () => {
               {presentLocation}
             </span>
           </h3>
-          {/* Discovered At */}
           <h3 className="flex items-center text-gray-800 font-semibold">
             <FaSearchengin className="text-blue-500 w-5 h-5" />
             <span className="ml-2">

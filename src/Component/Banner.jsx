@@ -1,6 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { motion } from "motion/react";
 
 import banner1 from "../assets/banner1.jpg";
 import banner2 from "../assets/banner2.jpg";
@@ -80,24 +81,67 @@ export const Banner = () => {
               className="relative h-[500px] md:h-[600px] lg:h-[835px]"
             >
               <div className="absolute inset-0">
-                <img
+                <motion.img
                   className="w-full h-full object-cover"
                   src={banner.image}
+                  initial={{ scale: 1 }}
+                  animate={{ scale: 1.05 }}
+                  transition={{
+                    duration: 5,
+                    ease: "easeInOut",
+                  }}
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60"></div>
               <div className="absolute inset-0 flex items-center justify-center text-white text-center px-4">
                 <div className="lg:w-8/12 mx-auto">
-                  <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold">
+                  <motion.h1
+                    className="text-4xl md:text-5xl lg:text-7xl font-bold"
+                    initial={{ y: -50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{
+                      duration: 1,
+                      ease: "easeOut",
+                    }}
+                  >
                     {banner.title}
-                  </h1>
-                  <p className="mt-4 text-lg md:text-lg lg:text-2xl">
+                  </motion.h1>
+                  <motion.p
+                    className="mt-4 text-lg md:text-lg lg:text-2xl"
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{
+                      duration: 1,
+                      delay: 0.3, // Slight delay to make it appear after the title
+                      ease: "easeOut",
+                    }}
+                  >
                     {banner.description}
-                  </p>
-                  <p className="mt-2 text-xl md:text-2xl">{banner.text}</p>
-                  <button className="btn mt-6 bg-custom-btn text-white w-48 h-14 rounded-none border-none transition-all duration-300 ease-in-out transform hover:bg-white hover:text-black hover:underline hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-btn-dark text-lg font-bold">
+                  </motion.p>
+                  <motion.p
+                    className="mt-2 text-xl md:text-2xl"
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{
+                      duration: 1,
+                      delay: 0.6, // Delay to make it appear after the description
+                      ease: "easeOut",
+                    }}
+                  >
+                    {banner.text}
+                  </motion.p>
+                  <motion.button
+                    className="mt-6 bg-custom-btn text-white w-48 h-14 rounded-none border-none transition-all duration-300 ease-in-out transform hover:bg-white hover:text-black hover:underline hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-btn-dark text-lg font-bold"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 0.9,
+                      ease: "easeOut",
+                    }}
+                  >
                     Learn More
-                  </button>
+                  </motion.button>
                 </div>
               </div>
             </div>

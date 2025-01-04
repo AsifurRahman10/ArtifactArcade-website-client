@@ -3,6 +3,7 @@ import { Title } from "../Component/Title";
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 export const UpdateArtifacts = () => {
   const data = useLoaderData();

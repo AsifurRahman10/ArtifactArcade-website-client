@@ -50,12 +50,18 @@ export const Login = () => {
     handleGoogleLogin().then((res) => {
       const name = res.user.displayName;
       const email = res.user.email;
-      const userData = { name, email };
+      const likedArtifacts = [];
+      const userData = { name, email, likedArtifacts };
       axios.post("http://localhost:4000/user", userData).then((res) => {
-        if (location.state) {
-          return navigate(location.state.from);
+        if (res.data.success) {
+          if (location.state) {
+            return navigate(location.state.from);
+          }
+
+          navigate("/");
+        } else {
+          console.error("Error:", res.data.message);
         }
-        navigate("/");
       });
     });
   };
@@ -67,11 +73,11 @@ export const Login = () => {
           <title>Login - ArtifactArcade</title>
         </Helmet>
       </HelmetProvider>
-      <div className="flex-1">
+      <div className="flex-1 w-11/12 mx-auto">
         <div className="p-4 lg:w-7/12 mx-auto bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
           <form className="space-y-6" onSubmit={handleLoginWithEmail}>
             <h5 className="text-2xl font-medium text-gray-900 dark:text-white title-text">
-              Please Login to your account
+              Please login to your account
             </h5>
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
