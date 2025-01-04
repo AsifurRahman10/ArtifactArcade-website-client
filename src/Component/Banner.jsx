@@ -72,12 +72,12 @@ export const Banner = () => {
       <div className="slider-container">
         <Slider
           {...settings}
-          className="relative overflow-hidden max-h-[700px]"
+          className="relative overflow-hidden max-h-[835px]"
         >
           {bannerImg.map((banner, idx) => (
             <div
               key={idx}
-              className="relative h-[500px] md:h-[600px] lg:h-[700px]"
+              className="relative h-[500px] md:h-[600px] lg:h-[835px]"
             >
               <div className="absolute inset-0">
                 <img

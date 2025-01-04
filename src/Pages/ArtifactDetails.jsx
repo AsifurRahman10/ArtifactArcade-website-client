@@ -4,7 +4,7 @@ import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { MdLocationOff } from "react-icons/md";
 import { FaSearchengin } from "react-icons/fa";
 import axios, { Axios } from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
@@ -23,8 +23,24 @@ export const ArtifactDetails = () => {
     artifactImage,
     like,
   } = data;
-  const [liked, setLiked] = useState(like);
+  const [liked, setLiked] = useState(false);
   const [likeToggle, setLikeToggle] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/likedArtifacts?email=${user.email}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        const alreadyLiked = res.data.likedArtifacts.find(
+          (item) => item.id === _id
+        );
+        if (alreadyLiked) {
+          setLiked(true);
+          setLikeToggle(true);
+        }
+      });
+  }, [user.email, _id]);
   const handleLike = () => {
     setLikeToggle(!likeToggle);
     setLiked((prevLiked) => {

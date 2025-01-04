@@ -45,28 +45,28 @@ export const Register = () => {
                 setUser((prevUser) => {
                   return { ...prevUser, displayName: name, photoURL: image };
                 });
-                const userData = { name, email };
+                const likedArtifacts = [];
+                const userData = { name, email, likedArtifacts };
                 axios
                   .post("http://localhost:4000/user", userData)
                   .then((res) => {
-                    console.log(res);
+                    navigate("/");
+                    const Toast = Swal.mixin({
+                      toast: true,
+                      position: "top-end",
+                      showConfirmButton: false,
+                      timer: 3000,
+                      timerProgressBar: true,
+                      didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                      },
+                    });
+                    Toast.fire({
+                      icon: "success",
+                      title: "Registration successful! Welcome",
+                    });
                   });
-                navigate("/");
-                const Toast = Swal.mixin({
-                  toast: true,
-                  position: "top-end",
-                  showConfirmButton: false,
-                  timer: 3000,
-                  timerProgressBar: true,
-                  didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                  },
-                });
-                Toast.fire({
-                  icon: "success",
-                  title: "Signed in successfully",
-                });
               });
             }
           });

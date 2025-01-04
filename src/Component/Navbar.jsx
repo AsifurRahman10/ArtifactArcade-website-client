@@ -8,6 +8,7 @@ export const Navbar = () => {
   const { user, handleSignOut } = useContext(AuthContext);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  console.log(isDropdownOpen);
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const handleDropDown = () => {
     setIsDropdownOpen(!isDropdownOpen);

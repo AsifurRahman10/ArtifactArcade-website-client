@@ -11,7 +11,6 @@ export const Login = () => {
   const { handleGoogleLogin, loginWithEmail } = useContext(AuthContext);
   const [error, setError] = useState("");
   const location = useLocation();
-  console.log(location);
   const navigate = useNavigate();
 
   const handleLoginWithEmail = (e) => {
@@ -72,7 +71,7 @@ export const Login = () => {
         <div className="p-4 lg:w-7/12 mx-auto bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
           <form className="space-y-6" onSubmit={handleLoginWithEmail}>
             <h5 className="text-2xl font-medium text-gray-900 dark:text-white title-text">
-              Please LogIn to your account
+              Please Login to your account
             </h5>
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

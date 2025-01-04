@@ -185,6 +185,32 @@ export const AddArtifacts = () => {
               required
             />
           </div>
+          <hr className="h-px my-4 lg:my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+          {/* adder name */}
+          <div className="flex lg:items-center flex-col md:flex-row mt-4 justify-between">
+            <label className="block mb-2 text-lg  font-bold text-black dark:text-white flex-1">
+              Artifact adder name
+            </label>
+            <input
+              value={user.displayName}
+              type="text"
+              readOnly
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-custom-btn focus:border-custom-btn block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-custom-btn dark:focus:border-custom-btn flex-1"
+            />
+          </div>
+          <hr className="h-px my-4 lg:my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+          {/* adder email */}
+          <div className="flex lg:items-center flex-col md:flex-row mt-4 justify-between">
+            <label className="block mb-2 text-lg  font-bold text-black dark:text-white flex-1">
+              Artifact adder email
+            </label>
+            <input
+              value={user.email}
+              type="text"
+              readOnly
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-custom-btn focus:border-custom-btn block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-custom-btn dark:focus:border-custom-btn flex-1"
+            />
+          </div>
           <button className="btn w-8/12 mx-auto block mt-14 bg-custom-btn text-white rounded-full">
             Add Artifact
           </button>
