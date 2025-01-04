@@ -183,7 +183,7 @@ export const UpdateArtifacts = () => {
               required
             />
           </div>
-          <button className="btn w-8/12 mx-auto block mt-14 bg-custom-btn text-white rounded-full">
+          <button className="btn w-8/12 py-2 mx-auto block mt-14 bg-custom-btn text-white rounded-full">
             Update Artifact
           </button>
         </form>

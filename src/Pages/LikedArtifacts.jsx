@@ -4,10 +4,13 @@ import axios from "axios";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Link } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import Lottie from "lottie-react";
+import loadingImg from "../../public/loading.json";
 
 export const LikedArtifacts = () => {
   const { user } = useContext(AuthContext);
   const [likedData, setLikeData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -16,8 +19,22 @@ export const LikedArtifacts = () => {
       })
       .then((res) => {
         setLikeData(res.data.likedArtifacts);
-      });
-  }, []);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, [user.email]);
+
+  if (loading) {
+    return (
+      <div className="mix-h-screen w-full">
+        <Lottie
+          className="w-1/3 mx-auto"
+          animationData={loadingImg}
+          loop={true}
+        />
+      </div>
+    );
+  }
 
   if (!likedData || likedData.length === 0) {
     return (

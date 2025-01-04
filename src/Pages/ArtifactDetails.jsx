@@ -129,11 +129,17 @@ export const ArtifactDetails = () => {
               </span>
               <span className="ml-2 flex items-center">
                 {likeToggle ? (
-                  <button className="btn" onClick={handleDislike}>
+                  <button
+                    className="bg-[#f2f2f2] hover:bg-[#d2d2d2] rounded-lg flex justify-center items-center cursor-pointer p-2"
+                    onClick={handleDislike}
+                  >
                     <AiOutlineDislike className="text-blue-500 mr-1 text-3xl" />
                   </button>
                 ) : (
-                  <button className="btn" onClick={handleLike}>
+                  <button
+                    className="bg-[#f2f2f2] hover:bg-[#d2d2d2] rounded-lg flex justify-center items-center cursor-pointer p-2"
+                    onClick={handleLike}
+                  >
                     <AiOutlineLike className="text-blue-500 mr-1 text-3xl" />
                   </button>
                 )}

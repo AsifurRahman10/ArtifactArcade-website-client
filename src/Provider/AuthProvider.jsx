@@ -10,7 +10,6 @@ import {
 import React, { createContext, useEffect, useState } from "react";
 import { auth } from "../Firebase/firebase.init";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -63,13 +62,11 @@ const AuthProvider = ({ children }) => {
           },
           { withCredentials: true }
         );
-        setLoading(false);
       } else {
         const { data } = await axios.get("http://localhost:4000/logout", {
           withCredentials: true,
         });
-        setUser(currentUser);
-        setLoading(false);
+        setUser(null);
       }
       setLoading(false);
     });

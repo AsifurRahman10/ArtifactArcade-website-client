@@ -16,11 +16,12 @@ export const Banner = () => {
     lazyLoad: true,
     infinite: true,
     autoplay: true,
-    speed: 500,
-    autoplaySpeed: 3000,
+    speed: 300,
+    autoplaySpeed: 20000,
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 2,
+    cssEase: "ease-in-out",
   };
 
   const bannerImg = [
@@ -69,85 +70,84 @@ export const Banner = () => {
   ];
 
   return (
-    <div>
-      <div className="slider-container">
-        <Slider
-          {...settings}
-          className="relative overflow-hidden max-h-[835px]"
-        >
-          {bannerImg.map((banner, idx) => (
-            <div
-              key={idx}
-              className="relative h-[500px] md:h-[600px] lg:h-[835px]"
-            >
-              <div className="absolute inset-0">
-                <motion.img
-                  className="w-full h-full object-cover"
-                  src={banner.image}
-                  initial={{ scale: 1 }}
-                  animate={{ scale: 1.05 }}
+    <div className="relative">
+      <Slider {...settings} className="relative overflow-hidden">
+        {bannerImg.map((banner, idx) => (
+          <div
+            key={idx}
+            className="relative h-[400px] md:h-[600px] lg:h-[800px] overflow-hidden"
+          >
+            {/* Background Image */}
+            <motion.img
+              className="w-full h-full object-cover"
+              src={banner.image}
+              style={{ transformOrigin: "center" }}
+              initial={{ scale: 1 }}
+              animate={{ scale: 1.05 }}
+              transition={{
+                duration: 5,
+                ease: "easeInOut",
+              }}
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70"></div>
+
+            {/* Content */}
+            <div className="absolute inset-0 flex items-center justify-center text-white text-center px-4">
+              <div className="lg:w-8/12 mx-auto">
+                <motion.h1
+                  className="text-3xl md:text-5xl lg:text-7xl font-bold"
+                  initial={{ y: -50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
                   transition={{
-                    duration: 5,
-                    ease: "easeInOut",
+                    duration: 1,
+                    ease: "easeOut",
                   }}
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60"></div>
-              <div className="absolute inset-0 flex items-center justify-center text-white text-center px-4">
-                <div className="lg:w-8/12 mx-auto">
-                  <motion.h1
-                    className="text-4xl md:text-5xl lg:text-7xl font-bold"
-                    initial={{ y: -50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      duration: 1,
-                      ease: "easeOut",
-                    }}
-                  >
-                    {banner.title}
-                  </motion.h1>
-                  <motion.p
-                    className="mt-4 text-lg md:text-lg lg:text-2xl"
-                    initial={{ y: 50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      duration: 1,
-                      delay: 0.3, // Slight delay to make it appear after the title
-                      ease: "easeOut",
-                    }}
-                  >
-                    {banner.description}
-                  </motion.p>
-                  <motion.p
-                    className="mt-2 text-xl md:text-2xl"
-                    initial={{ y: 50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      duration: 1,
-                      delay: 0.6, // Delay to make it appear after the description
-                      ease: "easeOut",
-                    }}
-                  >
-                    {banner.text}
-                  </motion.p>
-                  <motion.button
-                    className="mt-6 bg-custom-btn text-white w-48 h-14 rounded-none border-none transition-all duration-300 ease-in-out transform hover:bg-white hover:text-black hover:underline hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-btn-dark text-lg font-bold"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 0.8,
-                      delay: 0.9,
-                      ease: "easeOut",
-                    }}
-                  >
-                    Learn More
-                  </motion.button>
-                </div>
+                >
+                  {banner.title}
+                </motion.h1>
+                <motion.p
+                  className="mt-4 text-sm md:text-lg lg:text-xl"
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.3,
+                    ease: "easeOut",
+                  }}
+                >
+                  {banner.description}
+                </motion.p>
+                <motion.p
+                  className="mt-2 text-lg md:text-2xl"
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.6,
+                    ease: "easeOut",
+                  }}
+                >
+                  {banner.text}
+                </motion.p>
+                <motion.button
+                  className="mt-6 bg-custom-btn text-white px-6 py-3 rounded-md border-none transition-all duration-300 transform hover:bg-white hover:text-black hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-btn-dark text-base md:text-lg font-bold"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.9,
+                    ease: "easeOut",
+                  }}
+                >
+                  Learn More
+                </motion.button>
               </div>
             </div>
-          ))}
-        </Slider>
-      </div>
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 };
