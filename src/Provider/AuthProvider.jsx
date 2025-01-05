@@ -55,11 +55,15 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         setUser(currentUser);
 
-        axios.post(
-          "https://artifact-arcade-server.vercel.app/jwt",
-          { email: currentUser.email },
-          { withCredentials: true }
-        );
+        axios
+          .post(
+            "https://artifact-arcade-server.vercel.app/jwt",
+            { email: currentUser.email },
+            { withCredentials: true }
+          )
+          .then((res) => {
+            setLoading(false);
+          });
       } else {
         axios
           .post("https://artifact-arcade-server.vercel.app/logout", null, {
@@ -67,9 +71,9 @@ const AuthProvider = ({ children }) => {
           })
           .then(() => {
             setUser(null);
+            setLoading(false);
           });
       }
-      setLoading(false);
     });
 
     return () => unsubscribe(); // Cleanup the observer on unmount

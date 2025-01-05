@@ -8,8 +8,13 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 export const Register = () => {
-  const { handleGoogleLogin, registerWithEmail, addProfile, setUser } =
-    useContext(AuthContext);
+  const {
+    handleGoogleLogin,
+    registerWithEmail,
+    addProfile,
+    setUser,
+    setLoading,
+  } = useContext(AuthContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const handleRegister = (e) => {
@@ -69,6 +74,7 @@ export const Register = () => {
                       icon: "success",
                       title: "Registration successful! Welcome",
                     });
+                    setLoading(false);
                   });
               });
             }
