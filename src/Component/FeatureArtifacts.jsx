@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 export const FeatureArtifacts = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:4000/highestLike").then((res) => {
-      setData(res.data);
-    });
+    axios
+      .get("https://artifact-arcade-server.vercel.app/highestLike")
+      .then((res) => {
+        setData(res.data);
+      });
   }, []);
   return (
     <div className="py-10 md:py-20 w-11/12 lg:w-9/12 mx-auto">

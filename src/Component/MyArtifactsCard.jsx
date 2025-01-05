@@ -19,7 +19,9 @@ export const MyArtifactsCard = ({ item, setMyArtifacts }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:4000/allArtifacts/${_id}`)
+          .delete(
+            `https://artifact-arcade-server.vercel.app/allArtifacts/${_id}`
+          )
           .then((res) => {
             if (res.data.deletedCount > 0) {
               setMyArtifacts((prev) =>

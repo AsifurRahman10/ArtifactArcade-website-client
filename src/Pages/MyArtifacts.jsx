@@ -4,37 +4,23 @@ import axios from "axios";
 import { AuthContext } from "../Provider/AuthProvider";
 import { MyArtifactsCard } from "../Component/MyArtifactsCard";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import Lottie from "lottie-react";
-import loadingImg from "../../public/loading.json";
 
 export const MyArtifacts = () => {
   const { user } = useContext(AuthContext);
   const [myArtifacts, setMyArtifacts] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/myArtifacts?email=${user.email}`, {
-        withCredentials: true,
-      })
+      .get(
+        `https://artifact-arcade-server.vercel.app/myArtifacts?email=${user.email}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         setMyArtifacts(res.data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
+      });
   }, []);
-
-  if (loading) {
-    return (
-      <div className="mix-h-screen w-full">
-        <Lottie
-          className="w-1/3 mx-auto"
-          animationData={loadingImg}
-          loop={true}
-        />
-      </div>
-    );
-  }
 
   if (!myArtifacts || myArtifacts.length === 0) {
     return (

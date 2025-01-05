@@ -50,28 +50,31 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  //observer
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser?.email) {
         setUser(currentUser);
-        const { data } = await axios.post(
-          "http://localhost:4000/jwt",
-          {
-            email: currentUser?.email,
-          },
+
+        axios.post(
+          "https://artifact-arcade-server.vercel.app/jwt",
+          { email: currentUser.email },
           { withCredentials: true }
         );
       } else {
-        const { data } = await axios.get("http://localhost:4000/logout", {
-          withCredentials: true,
-        });
-        setUser(null);
+        axios
+          .post("https://artifact-arcade-server.vercel.app/logout", null, {
+            withCredentials: true,
+          })
+          .then(() => {
+            setUser(null);
+          });
       }
       setLoading(false);
     });
-    return () => unsubscribe();
+
+    return () => unsubscribe(); // Cleanup the observer on unmount
   }, []);
+
   const authInfo = {
     handleGoogleLogin,
     registerWithEmail,

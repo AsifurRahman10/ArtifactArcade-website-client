@@ -52,17 +52,18 @@ export const Login = () => {
       const email = res.user.email;
       const likedArtifacts = [];
       const userData = { name, email, likedArtifacts };
-      axios.post("http://localhost:4000/user", userData).then((res) => {
-        if (res.data.success) {
-          if (location.state) {
-            return navigate(location.state.from);
-          }
+      axios
+        .post("https://artifact-arcade-server.vercel.app/user", userData)
+        .then((res) => {
+          if (res.data.success) {
+            if (location.state) {
+              return navigate(location.state.from);
+            }
 
-          navigate("/");
-        } else {
-          console.error("Error:", res.data.message);
-        }
-      });
+            navigate("/");
+          } else {
+          }
+        });
     });
   };
 

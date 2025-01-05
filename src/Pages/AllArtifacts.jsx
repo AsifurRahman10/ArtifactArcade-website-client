@@ -4,9 +4,6 @@ import { Card } from "../Component/Card";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { AuthContext } from "../Provider/AuthProvider";
-import Lottie from "lottie-react";
-import loadingImg from "../../public/loading.json";
 
 export const AllArtifacts = () => {
   const [allArtifactsData, setAllArtifactsData] = useState([]);
@@ -14,7 +11,9 @@ export const AllArtifacts = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/allArtifacts?search=${search}`)
+      .get(
+        `https://artifact-arcade-server.vercel.app/allArtifacts?search=${search}`
+      )
       .then((res) => {
         setAllArtifactsData(res.data);
       });

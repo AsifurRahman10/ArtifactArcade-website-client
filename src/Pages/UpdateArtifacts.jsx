@@ -33,7 +33,10 @@ export const UpdateArtifacts = () => {
     const updatedData = { ...initialData, selectedType };
 
     axios
-      .patch(`http://localhost:4000/updateArtifacts/${_id}`, updatedData)
+      .patch(
+        `https://artifact-arcade-server.vercel.app/updateArtifacts/${_id}`,
+        updatedData
+      )
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           Swal.fire({
