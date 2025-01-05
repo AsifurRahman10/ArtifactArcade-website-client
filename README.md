@@ -31,33 +31,18 @@ ArtifactArcade aims to make learning about historical artifacts interactive and 
 8. **Authentication**:
    - Users must log in to access certain features (e.g., adding or liking artifacts).
 
-## 📦 Packages Used
+## 🛠️ Technologies Used
 
-Here is the list of npm packages that power ArtifactArcade:
+This project is powered by a range of modern web technologies and tools to provide a seamless and engaging user experience:
 
-- **[axios](https://www.npmjs.com/package/axios)**: "^1.7.9"  
-  For making HTTP requests to the backend server.
-- **[firebase](https://www.npmjs.com/package/firebase)**: "^11.1.0"  
-  For authentication and hosting.
-- **[flowbite-react](https://www.npmjs.com/package/flowbite-react)**: "^0.10.2"  
-  For pre-built UI components.
-- **[lottie-react](https://www.npmjs.com/package/lottie-react)**: "^2.4.0"  
-  To render engaging animations.
-- **[motion](https://www.npmjs.com/package/motion)**: "^11.15.0"  
-  For smooth animations and transitions.
-- **[react](https://www.npmjs.com/package/react)**: "^18.3.1"  
-  React core library.
-- **[react-dom](https://www.npmjs.com/package/react-dom)**: "^18.3.1"  
-  For DOM rendering.
-- **[react-helmet-async](https://www.npmjs.com/package/react-helmet-async)**: "^2.0.5"  
-  To manage document head updates.
-- **[react-icons](https://www.npmjs.com/package/react-icons)**: "^5.4.0"  
-  For including icon sets in the app.
-- **[react-router-dom](https://www.npmjs.com/package/react-router-dom)**: "^7.1.0"  
-  For navigation and private routes.
-- **[react-slick](https://www.npmjs.com/package/react-slick)**: "^0.30.3"  
-  For carousel/slider functionality.
-- **[slick-carousel](https://www.npmjs.com/package/slick-carousel)**: "^1.8.1"  
-  Supporting CSS for `react-slick`.
-- **[sweetalert2](https://www.npmjs.com/package/sweetalert2)**: "^11.15.3"  
-  For elegant alert dialogs.
+- **React**: For building the user interface with components and managing the application state.
+- **React Router DOM**: Enables navigation and private routing across different pages.
+- **Firebase**: Used for user authentication and hosting the live site.
+- **Axios**: Simplifies making HTTP requests to interact with the backend server.
+- **Flowbite React**: Provides pre-designed UI components for faster development.
+- **Lottie React**: Brings the site to life with stunning animations.
+- **Motion**: Ensures smooth animations and transitions across the site.
+- **React Helmet Async**: Dynamically manages page titles and meta tags for SEO optimization.
+- **React Icons**: Adds visually appealing icons to the interface.
+- **React Slick & Slick Carousel**: Implements carousel sliders to showcase content beautifully.
+- **SweetAlert2**: Provides elegant pop-up alerts for user interactions.
