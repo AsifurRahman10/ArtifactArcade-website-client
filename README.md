@@ -1,5 +1,7 @@
 # ArtifactArcade
 
+![Homepage](https://i.ibb.co.com/8ngKRKRz/ac.png)
+
 A web application dedicated to tracking historical artifacts like the Rosetta Stone, Antikythera Mechanism, and more. ArtifactArcade allows users to explore, view details, and contribute their own artifact entries, creating a vibrant repository of history.
 
 ## 🌟 Purpose
