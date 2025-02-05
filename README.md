@@ -54,8 +54,8 @@ To run this project locally, follow these steps:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/AsifurRahman10/NextGenHunt-website.git
-cd NextGenHunt-website
+git clone https://github.com/AsifurRahman10/ArtifactArcade-website-client.git
+cd ArtifactArcade-website-client
 ```
 
 ### 2. Install Dependencies
