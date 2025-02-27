@@ -10,7 +10,7 @@ ArtifactArcade aims to make learning about historical artifacts interactive and 
 
 ## 🌐 Live URL
 
-[Visit ArtifactArcade](https://artifactarcade-website.web.app/)
+[Visit ArtifactArcade](https://artifactarcade-website.web.app/)  
 [ArtifactArcade-backend](https://github.com/AsifurRahman10/ArtifactArcade-website-server.git)
 
 ## 🛠️ Key Features
