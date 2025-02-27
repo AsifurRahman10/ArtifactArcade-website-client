@@ -53,10 +53,7 @@ export const Register = () => {
                 const likedArtifacts = [];
                 const userData = { name, email, likedArtifacts };
                 axios
-                  .post(
-                    "https://artifact-arcade-server.vercel.app/user",
-                    userData
-                  )
+                  .post("http://localhost:4000/user", userData)
                   .then((res) => {
                     navigate("/");
                     const Toast = Swal.mixin({
@@ -92,11 +89,9 @@ export const Register = () => {
       const email = res.user.email;
       const likedArtifacts = [];
       const userData = { name, email, likedArtifacts };
-      axios
-        .post("https://artifact-arcade-server.vercel.app/user", userData)
-        .then((res) => {
-          navigate("/");
-        });
+      axios.post("http://localhost:4000/user", userData).then((res) => {
+        navigate("/");
+      });
     });
   };
   return (
